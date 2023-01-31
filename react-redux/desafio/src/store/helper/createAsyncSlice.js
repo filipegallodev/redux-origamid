@@ -24,7 +24,7 @@ const createAsyncSlice = (config) => {
       fetchSuccess(state, action) {
         state.loading = false;
         state.data = action.payload;
-        state.erro = null;
+        state.error = null;
       },
       fetchError(state, action) {
         state.loading = false;
