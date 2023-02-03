@@ -8,8 +8,6 @@ import Loading from "../Helper/Loading";
 import Error from "../Helper/Error";
 
 const Feed = ({ user }) => {
-  const [modalPhoto, setModalPhoto] = React.useState(null);
-
   const dispatch = useDispatch();
   const { infinite, loading, list, error } = useSelector((state) => state.feed);
 
@@ -43,12 +41,21 @@ const Feed = ({ user }) => {
 
   return (
     <div>
-      {modalPhoto && (
-        <FeedModal setModalPhoto={setModalPhoto} photo={modalPhoto} />
-      )}
-      {list.length > 0 && <FeedPhotos setModalPhoto={setModalPhoto} />}
+      <FeedModal />
+      {list.length > 0 && <FeedPhotos />}
       {loading && <Loading />}
       {error && <Error error={error} />}
+      {!infinite && !user && (
+        <p
+          style={{
+            textAlign: "center",
+            padding: "2rem 0 4rem 0",
+            color: "#888",
+          }}
+        >
+          Não existem mais postagens.
+        </p>
+      )}
     </div>
   );
 };
